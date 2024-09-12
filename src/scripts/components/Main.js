@@ -34,6 +34,7 @@ export default class Main extends React.Component {
       activeElement: null,
       startModel: this.props.initialModel,
       loadingSpinner: false,
+      hotspot: null,
     };
   }
 
@@ -50,7 +51,6 @@ export default class Main extends React.Component {
     modelViewer.addEventListener('load', () => {
       // create hotspots and set model viewer instance
 
-      console.log('loaded');
       this.setState({
         loadingSpinner: false,
         modelViewerInstance: modelViewer,
@@ -95,11 +95,11 @@ export default class Main extends React.Component {
 
   handleModelClick = (event) => {
     // retrieve clicked point on 3D Model from model-viewer instance
-    console.log(this.state);
     const clickedPoint = this.state.modelViewerInstance.surfaceFromPoint(
       event.clientX,
       event.clientY
     );
+
     if (clickedPoint) {
       // check if listening for clicks
       let editingInteraction = InteractionEditingType.NOT_EDITING;
@@ -358,6 +358,7 @@ export default class Main extends React.Component {
         listeningForClicks: false,
         editingLibrary: null,
         activeElement: null,
+        hotspot: null,
       });
       return;
     }
@@ -369,10 +370,10 @@ export default class Main extends React.Component {
       editingHotspotIndex: -1,
       listeningForClicks: false,
       editingLibrary: null,
+      hotspot: null,
     });
 
-    // this.context.params.interactions = interactions;
-    // this.context.setValue(this.context.field, this.context.params);
+    //this.context.setValue(this.context.params.models, this.context.models);
   }
 
   editInteraction(params, modelParams = null) {
@@ -397,6 +398,7 @@ export default class Main extends React.Component {
         editingHotspotIndex: -1,
         listeningForClicks: false,
         editingLibrary: null,
+        hotspot: newInteraction,
       });
     } else {
       model.interactions.push(newInteraction);
@@ -404,6 +406,7 @@ export default class Main extends React.Component {
         activeElement: null,
         listeningForClicks: false,
         editingLibrary: null,
+        hotspot: newInteraction,
       });
 
       // set context params hotspots to new hotspots array
@@ -444,7 +447,6 @@ export default class Main extends React.Component {
   render() {
     const hasModels = this.context.params.models.length > 0;
     const model = getModelFromId(this.context.params.models, this.state.currentModel);
-    console.log(model);
 
     return (
       <div className='model-viewer-container'>

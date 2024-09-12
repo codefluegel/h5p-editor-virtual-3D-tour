@@ -12,7 +12,7 @@ import {
 import { sanitizeModelForm, validateModelForm } from '@h5phelpers/forms/sceneForm';
 import '@components/EditingDialog/InteractionEditor.scss';
 import { getModelFromId } from '../../h5phelpers/modelParams.js';
-import GoToSceneWrapper from "./GoToScene/GoToSceneWrapper";
+import GoToSceneWrapper from './GoToScene/GoToSceneWrapper';
 
 export const InteractionEditingType = {
   NOT_EDITING: null,
@@ -150,8 +150,7 @@ export default class InteractionEditor extends React.Component {
         removeLabel={this.context.t('remove')}
       >
         <div className={semanticsClasses.join(' ')} ref={this.semanticsRef} />
-        {
-          this.state.isInitialized && isGoToScene(this.params) &&
+        {this.state.isInitialized && isGoToScene(this.params) && (
           <GoToSceneWrapper
             selectedModel={this.removeInputErrors.bind(this)}
             hasInputError={this.state.hasInputError}
@@ -160,7 +159,7 @@ export default class InteractionEditor extends React.Component {
             params={this.params}
             setScene={this.setScene.bind(this)}
           />
-        }
+        )}
       </EditingDialog>
     );
   }

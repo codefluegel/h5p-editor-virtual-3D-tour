@@ -26,7 +26,7 @@
     "createAModelToGoTo": "Erstellen Sie ein neues Modell, zu dem Sie gehen möchten",
     "createModelError": "Bitte erstellen Sie ein neues Modell, um fortzufahren",
     "pickAnExistingModel": "Wählen Sie ein bestehendes Modell aus",
-    "selectAModelError": "Bitte wählen Sie ein Modell",
+    "selectAModelerror": "Bitte wählen Sie ein Modell",
     "setCameraStartTooltip": "Aktuellen Kamerawinkel als Startpunkt für dieses Modell festlegen",
     "deleteInteractionTitle": "Interaktion löschen",
     "deleteInteractionText": "Sind Sie sicher, dass Sie diese Interaktion löschen möchten?",

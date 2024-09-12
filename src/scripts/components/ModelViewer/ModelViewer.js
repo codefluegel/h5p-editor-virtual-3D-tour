@@ -31,8 +31,7 @@ const ModelViewer = (props) => {
         onClick={handleClick}
         style={{ width: '100%', height: '100%' }}
         src={filePath}
-        alt='Virtual 3D Tour Model'
-        loading='eager'
+        alt={modelPath}
         camera-controls
       >
         {hs &&

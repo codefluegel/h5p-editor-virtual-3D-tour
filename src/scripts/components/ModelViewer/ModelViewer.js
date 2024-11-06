@@ -22,7 +22,7 @@ const ModelViewer = (props) => {
     }, 100);
 
     return () => clearTimeout(timeoutId);
-  }, [hotspots]);
+  }, [hotspots, modelPath]);
 
   return (
     <>

@@ -44,11 +44,11 @@ export default class GoToSceneWrapper extends Component {
 
   setNextModelId(modelId) {
     // Update number widget and params
+
     const nextModelIdWidget = this.props.nextModelIdWidget;
     nextModelIdWidget.$input.val(modelId);
     this.props.params.action.params.nextSceneId = modelId;
     this.props.selectedModel();
-
     this.setState({
       markedModel: modelId,
     });

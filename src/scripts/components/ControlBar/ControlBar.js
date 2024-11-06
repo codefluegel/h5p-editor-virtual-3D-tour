@@ -15,6 +15,10 @@ export default class ControlBar extends Component {
     super();
   }
 
+  changeModel(modelId) {
+    if (modelId !== this.props.currentModel) this.props.changeModel(modelId);
+  }
+
   /**
    * React render function.
    * @returns {object} JSX element.
@@ -31,13 +35,16 @@ export default class ControlBar extends Component {
             models={this.context.params.models}
             startModel={this.props.startModel}
             markedModel={this.props.currentModel}
+            onModelClick={(modelId) => {
+              if (this.props.currentModel !== modelId) this.props.changeModel(modelId);
+            }}
           >
             {(isStartModel, modelId) => (
               <ModelSelectorSubmenu
                 modelPath={this.props.currentModel}
                 isStartModel={isStartModel}
                 setStartModel={this.props.setStartModel.bind(this, modelId)}
-                onJump={this.props.changeModel.bind(this, modelId)}
+                onJump={this.changeModel.bind(this, modelId)}
                 onEdit={this.props.editModel.bind(this, modelId)}
                 onClone={this.props.cloneModel.bind(this, modelId)}
                 onDelete={this.props.deleteModel.bind(this, modelId)}

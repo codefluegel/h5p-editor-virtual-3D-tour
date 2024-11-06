@@ -102,6 +102,11 @@ export default class Main extends React.Component {
         event.clientX,
         event.clientY
       );
+      if (this.state.isModelSelectorExpanded) {
+        this.setState({
+          isModelSelectorExpanded: false,
+        });
+      }
 
       if (!clickedPoint && this.state.activeElement) {
         toast.error('Try click ON the model', {

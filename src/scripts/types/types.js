@@ -2,11 +2,8 @@ import PropTypes from 'prop-types';
 // import {InteractionEditingType} from "../components/EditingDialog/InteractionEditor";
 
 export const modelType = PropTypes.shape({
-  modelname: PropTypes.string.isRequired,
-  scenesrc: PropTypes.shape({
-    path: PropTypes.string.isRequired,
-    alt: PropTypes.string,
-  }).isRequired,
+  modelname: PropTypes.string,
+  modelId: PropTypes.number,
 });
 
 export const editingModelType = PropTypes.oneOfType([

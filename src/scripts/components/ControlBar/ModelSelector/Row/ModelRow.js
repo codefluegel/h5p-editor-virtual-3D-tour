@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { H5PContext } from '@context/H5PContext.js';
 import './ModelRow.scss';
+import { modelType } from '@types/types';
 
 export default class ModelRow extends Component {
   /**
@@ -71,13 +72,7 @@ export default class ModelRow extends Component {
 ModelRow.contextType = H5PContext;
 
 ModelRow.propTypes = {
-  model: PropTypes.shape({
-    scenename: PropTypes.string.isRequired,
-    scenesrc: PropTypes.shape({
-      path: PropTypes.string.isRequired,
-      alt: PropTypes.string,
-    }).isRequired,
-  }),
+  model: modelType,
   isMarkedModel: PropTypes.bool,
   isShowingCheck: PropTypes.bool,
   isAfterActiveModel: PropTypes.bool,

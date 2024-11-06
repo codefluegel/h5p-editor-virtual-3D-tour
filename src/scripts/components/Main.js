@@ -16,6 +16,8 @@ import { deleteModel, getModelFromId, updateModel } from '@h5phelpers/modelParam
 import NoModel from './ModelViewer/NoModel.js';
 import { showConfirmationDialog } from '../h5phelpers/h5pComponents.js';
 import LoadingSpinner from './LoadingSpinner/LoadingSpinner.js';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export default class Main extends React.Component {
   constructor(props) {
@@ -95,24 +97,41 @@ export default class Main extends React.Component {
 
   handleModelClick = (event) => {
     // retrieve clicked point on 3D Model from model-viewer instance
-    const clickedPoint = this.state.modelViewerInstance.surfaceFromPoint(
-      event.clientX,
-      event.clientY
-    );
+    if (this.state.modelViewerInstance) {
+      const clickedPoint = this.state.modelViewerInstance.surfaceFromPoint(
+        event.clientX,
+        event.clientY
+      );
 
-    if (clickedPoint) {
-      // check if listening for clicks
-      let editingInteraction = InteractionEditingType.NOT_EDITING;
-      if (this.state.activeElement) {
-        editingInteraction = InteractionEditingType.NEW_INTERACTION;
-      } else {
-        editingInteraction = InteractionEditingType.EDITING;
-      }
-      if (this.state.editingLibrary) {
-        this.setState({
-          currentClickPosition: clickedPoint,
-          editingInteraction,
+      if (!clickedPoint && this.state.activeElement) {
+        toast.error('Try click ON the model', {
+          position: 'bottom-right',
+          autoClose: 2000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          progress: undefined,
         });
+        return;
+      }
+
+      if (clickedPoint && this.state.activeElement) {
+        // check if listening for clicks
+        let editingInteraction = InteractionEditingType.NOT_EDITING;
+        if (this.state.activeElement) {
+          editingInteraction = InteractionEditingType.NEW_INTERACTION;
+          this.setState({
+            currentClickPosition: clickedPoint,
+            hotspot: null,
+          });
+        } else {
+          editingInteraction = InteractionEditingType.EDITING;
+        }
+        if (this.state.editingLibrary) {
+          this.setState({
+            currentClickPosition: clickedPoint,
+            editingInteraction,
+          });
+        }
       }
     }
   };
@@ -510,6 +529,14 @@ export default class Main extends React.Component {
           toggleExpandModelSelector={this.toggleExpandModelSelector.bind(this)}
         />
         {this.state.loadingSpinner && <LoadingSpinner />}
+        <ToastContainer
+          position='bottom-right'
+          autoClose={5000}
+          hideProgressBar={false}
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+        />
       </div>
     );
   }

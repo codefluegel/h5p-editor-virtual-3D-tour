@@ -69,7 +69,7 @@ export default class GoToSceneWrapper extends Component {
             currentModel={this.props.currentModel}
             hasInputError={this.props.hasInputError}
             newModel={this.createNewModel.bind(this)}
-            setNextModelId={this.setNextModelId.bind(this)}
+            setNextModelId={(modelId) => this.setNextModelId(modelId)}
           />
         )}
         <div ref={this.newModel} />

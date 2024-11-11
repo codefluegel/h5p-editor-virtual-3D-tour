@@ -11,7 +11,7 @@ const GoToSceneSelector = (props) => (
       models={props.models}
       markedModel={props.markedModel}
       onModelClick={(modelId) => {
-        props.setNextModelId.bind(this);
+        props.setNextModelId(modelId);
       }}
       isShowingCheck={true}
     />

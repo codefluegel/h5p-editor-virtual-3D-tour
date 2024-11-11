@@ -23,7 +23,9 @@ export default class GoToScene extends Component {
             <GoToSceneSelector
               models={models}
               markedModel={this.props.markedModel}
-              setNextModelId={this.props.setNextModelId.bind(this)}
+              setNextModelId={(modelId) => {
+                this.props.setNextModelId(modelId);
+              }}
               selectASceneErrorLabel={this.context.t('selectAModelerror')}
               pickAnExistingSceneLabel={this.context.t('pickAnExistingModel')}
             />

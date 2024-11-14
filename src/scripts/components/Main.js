@@ -97,11 +97,19 @@ export default class Main extends React.Component {
 
   handleModelClick = (event) => {
     // retrieve clicked point on 3D Model from model-viewer instance
-    if (this.state.modelViewerInstance) {
-      const clickedPoint = this.state.modelViewerInstance.surfaceFromPoint(
-        event.clientX,
-        event.clientY
-      );
+
+    const modelViewer = this.state.modelViewerInstance
+      ? this.state.modelViewerInstance
+      : document.getElementById(this.context.parent.params.subContentId || 'model-viewer-0');
+
+    if (!this.state.modelViewerInstance) {
+      this.setState({
+        modelViewerInstance: modelViewer,
+      });
+    }
+
+    if (modelViewer) {
+      const clickedPoint = modelViewer.surfaceFromPoint(event.clientX, event.clientY);
       if (this.state.isModelSelectorExpanded) {
         this.setState({
           isModelSelectorExpanded: false,

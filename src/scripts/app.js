@@ -4,7 +4,7 @@ import Main from '@components/Main';
 import { H5PContext } from '@context/H5PContext.js';
 import { createRoot } from 'react-dom/client';
 
-export default class ModelViewerWidget {
+export default class Virtual3DTour {
   constructor(parent, field, params, setValue) {
     // geting the model from the parent
     // this depends on the parent structure
@@ -12,6 +12,7 @@ export default class ModelViewerWidget {
 
     this.params = params || {};
 
+    console.log(1);
     this.params = Object.assign(
       {
         models: params ? params.models : [],
@@ -51,7 +52,7 @@ export default class ModelViewerWidget {
     const root = createRoot(wrapper);
     root.render(
       <H5PContext.Provider value={this}>
-        <Main initialModel={startModel}/>
+        <Main initialModel={startModel} />
       </H5PContext.Provider>
     );
   }
@@ -83,4 +84,4 @@ export default class ModelViewerWidget {
   };
 }
 
-H5PEditor.widgets.modelViewerWidget = H5PEditor.modelViewerWidget = ModelViewerWidget;
+H5PEditor.widgets.Virtual3DTour = H5PEditor.Virtual3DTour = Virtual3DTour;

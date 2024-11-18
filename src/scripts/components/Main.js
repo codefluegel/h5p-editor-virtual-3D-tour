@@ -100,7 +100,7 @@ export default class Main extends React.Component {
 
     const modelViewer = this.state.modelViewerInstance
       ? this.state.modelViewerInstance
-      : document.getElementById(this.context.parent.params.subContentId || 'model-viewer-0');
+      : document.getElementById('model-viewer-0');
 
     if (!this.state.modelViewerInstance) {
       this.setState({

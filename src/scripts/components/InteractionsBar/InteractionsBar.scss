@@ -88,9 +88,7 @@
     content: $fileForDownload;
   }
 
-  .h5p-gotoscene:before {
-    content: $goToScene;
-  }
+
   
   .h5p-imageslider:before,
   .h5p-singlechoiceset:before,
@@ -128,5 +126,9 @@
   }
   .h5p-questionset:before {
     content: $questionset;
+  }
+  .h5p-gotoscene:before {
+    font-family: "H5PFontAwesome4" !important;
+    content: $goToScene;
   }
 }

@@ -12,7 +12,6 @@ export default class Virtual3DTour {
 
     this.params = params || {};
 
-    console.log(1);
     this.params = Object.assign(
       {
         models: params ? params.models : [],

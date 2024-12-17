@@ -38,6 +38,7 @@
     "cloneModelTextWithObjects": "Das Klonen dieses Modells klont alle Interaktionen innerhalb des Modells. Sind Sie sicher, dass Sie dieses Modell klonen möchten?",
     "noPlaylistsAdded": "Keine Playlists hinzugefügt",
     "playlist": "Playlist",
-    "newPlaylist": "Neue Playlist"
+    "newPlaylist": "Neue Playlist",
+    "clickModel": "Versuche das Modell zu treffen"
   }
 }

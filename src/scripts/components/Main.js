@@ -1,23 +1,22 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import '@components/Main.scss';
-import ToolBar from '@components/Toolbar/Toolbar';
-import ModelViewer from '@components/ModelViewer/ModelViewer';
-import InteractionsBar from '@components/InteractionsBar/InteractionsBar.js';
 import InteractionEditor, {
   InteractionEditingType,
 } from '@components/EditingDialog/InteractionEditor.js';
-import ModelEditor from '@components/EditingDialog/ModelEditor.js';
+import ModelEditor, { ModelEditingType } from '@components/EditingDialog/ModelEditor.js';
+import InteractionsBar from '@components/InteractionsBar/InteractionsBar.js';
+import '@components/Main.scss';
+import ModelViewer from '@components/ModelViewer/ModelViewer';
+import ToolBar from '@components/Toolbar/Toolbar';
 import { H5PContext } from '@context/H5PContext.js';
-import { getSource } from '../context/H5PContext';
-import ControlBar from './ControlBar/ControlBar.js';
-import { ModelEditingType } from '@components/EditingDialog/ModelEditor.js';
 import { deleteModel, getModelFromId, updateModel } from '@h5phelpers/modelParams.js';
-import NoModel from './ModelViewer/NoModel.js';
-import { showConfirmationDialog } from '../h5phelpers/h5pComponents.js';
-import LoadingSpinner from './LoadingSpinner/LoadingSpinner.js';
+import PropTypes from 'prop-types';
+import React from 'react';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { getSource } from '../context/H5PContext';
+import { showConfirmationDialog } from '../h5phelpers/h5pComponents.js';
+import ControlBar from './ControlBar/ControlBar.js';
+import LoadingSpinner from './LoadingSpinner/LoadingSpinner.js';
+import NoModel from './ModelViewer/NoModel.js';
 
 export default class Main extends React.Component {
   constructor(props) {
@@ -117,7 +116,7 @@ export default class Main extends React.Component {
       }
 
       if (!clickedPoint && this.state.activeElement) {
-        toast.error('Try click ON the model', {
+        toast.error(this.context.t('clickModel'), {
           position: 'bottom-right',
           autoClose: 2000,
           hideProgressBar: false,

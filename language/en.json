@@ -38,6 +38,7 @@
     "cloneModelTextWithObjects": "Cloning this model will model clone all interactions within the model. Are you sure you wish to clone this model?",
     "noPlaylistsAdded": "No playlists added",
     "playlist": "Playlist",
-    "newPlaylist": "New playlist"
+    "newPlaylist": "New playlist",
+    "clickModel": "Try click ON the model"
   }
 }

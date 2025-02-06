@@ -1,4 +1,4 @@
-@import '@styles/icons.scss';
+@use '@styles/icons';
 
 .active-scene {
   padding: 0.5em;
@@ -14,7 +14,7 @@
   }
 
   &.three-sixty:before {
-    content: $threeSixtyScene;
+    content: icons.$threeSixtyScene;
   }
 
   .h5p-scene-denotation {

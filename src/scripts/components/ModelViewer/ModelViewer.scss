@@ -1,4 +1,4 @@
-@import "@styles/icons.scss";
+@use "@styles/icons";
 
 
   .h5p_text:before {
@@ -12,34 +12,34 @@
   }
 
   .h5p_image:before {
-    content: $image;
+    content: icons.$image;
     font-family: 'H5PFontAwesome4';
   }
 
   .h5p_audio:before {
-    content: $audio;
+    content: icons.$audio;
     font-family: 'H5PFontAwesome4';
   }
 
   .h5p_video:before {
-    content: $video;
+    content: icons.$video;
     font-family: 'H5PFontAwesome4';
   }
 
   .h5p_questionnaire:before {
-    content: $questionnaire;
+    content: icons.$questionnaire;
     font-family: 'H5PFontAwesome4';
     margin-top:2px;
   }
 
   .h5p_file_for_download:before {
-    content: $fileForDownload;
+    content: icons.$fileForDownload;
     font-family: 'H5PFontAwesome4';
     padding:0;
   }
 
   .h5p_go_to_scene:before {
-    content: $goToScene;
+    content: icons.$goToScene;
     font-family: 'H5PFontAwesome4';
   }
 
@@ -47,18 +47,18 @@
   .h5p_singlechoiceset:before,
   .h5p_summary:before {
     font-family: "H5PFontIcons";
-    content: $summary;
+    content: icons.$summary;
   }
 
   .h5p_singlechoiceset:before {
-    content: $singleChoiceSet;
+    content: icons.$singleChoiceSet;
   }
 
   .h5p_imageslider:before {
-    content: $imageSlider;
+    content: icons.$imageSlider;
   }
 
-  
+
 .hotspot{
   width: 25px;
   height: 25px;

@@ -76,7 +76,7 @@ ModelRow.propTypes = {
   isMarkedModel: PropTypes.bool,
   isShowingCheck: PropTypes.bool,
   isAfterActiveModel: PropTypes.bool,
-  isStartScene: PropTypes.bool,
+  isStartModel: PropTypes.bool,
   onModelClick: PropTypes.func,
   onTitleClick: PropTypes.func,
   children: PropTypes.node,

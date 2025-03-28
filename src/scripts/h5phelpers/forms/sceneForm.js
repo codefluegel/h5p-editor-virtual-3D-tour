@@ -1,15 +1,5 @@
 import { getModelField, isChildrenValid } from '../editorForms';
 
-const DefaultInteractionValues = {
-  threeSixty: {
-    spread: 20,
-  },
-  static: {
-    spread: 30,
-    center: [50, 50],
-  },
-};
-
 /**
  * Creates scene form and appends it to wrapper
  *

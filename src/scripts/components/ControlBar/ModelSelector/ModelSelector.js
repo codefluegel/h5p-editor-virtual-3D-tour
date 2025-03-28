@@ -64,7 +64,7 @@ export default class ModelSelector extends React.Component {
 ModelSelector.contextType = H5PContext;
 
 ModelSelector.propTypes = {
-  currentScene: PropTypes.number,
+  currentModel: PropTypes.number,
   isExpanded: PropTypes.bool,
   toggleExpand: PropTypes.func.isRequired,
   children: PropTypes.node,

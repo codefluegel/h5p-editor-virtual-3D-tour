@@ -1,5 +1,5 @@
-import React from 'react';
 import { H5PContext } from '@context/H5PContext.js';
+import React from 'react';
 import './NoModel.scss';
 
 export default class NoModel extends React.Component {
@@ -11,10 +11,8 @@ export default class NoModel extends React.Component {
     return (
       <div className='no-scene-container'>
         <div className='no-scene-wrapper'>
-          <div className='title'>Keine Modelle bisher</div>
-          <div className='description'>
-            Klicke auf den "Neue Model"-Button, um ein erstes Model hinzuzufügen
-          </div>
+          <div className='title'>{this.context.t('noModelsTitle')}</div>
+          <div className='description'>{this.context.t('noModelDescription')}</div>
         </div>
       </div>
     );

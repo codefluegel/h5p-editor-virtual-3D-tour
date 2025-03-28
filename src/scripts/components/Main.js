@@ -85,7 +85,13 @@ export default class Main extends React.Component {
 
   componentWillUnmount() {
     // remove event listener
-    this.state.modelViewerInstance.removeEventListener('load');
+    this.state.modelViewerInstance.removeEventListener('load', () => {
+      this.setState({
+        interactions: [],
+        modelViewerInstance: null,
+        animations: [],
+      });
+    });
   }
 
   handleLibraryChange = (library) => {
@@ -558,4 +564,6 @@ Main.contextType = H5PContext;
 
 Main.propTypes = {
   modelPath: PropTypes.string,
+  initialModelPath: PropTypes.string.isRequired,
+  initialModel: PropTypes.string.isRequired,
 };

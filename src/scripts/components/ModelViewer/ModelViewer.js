@@ -1,8 +1,9 @@
-// component to render hotspots from main a functional component
-import React, { useCallback, useEffect, useState } from 'react';
-import NoModel from './NoModel';
-import { getSource } from '../../context/H5PContext';
 import '@components/ModelViewer/ModelViewer.scss';
+import he from 'he';
+import PropTypes from 'prop-types';
+import React, { useEffect, useState } from 'react';
+import { getSource } from '../../context/H5PContext';
+import './ModelViewer.scss';
 
 const ModelViewer = (props) => {
   const { handleClick, hotspots, modelPath, id, showContentModal, mvInstance } = props;
@@ -31,8 +32,8 @@ const ModelViewer = (props) => {
         onClick={handleClick}
         style={{ width: '100%', height: '100%' }}
         src={filePath}
-        alt={modelPath}
         camera-controls
+        alt={modelPath.split('/').pop().split('.').slice(0, -1).join('.')}
       >
         {hs &&
           mvInstance &&
@@ -50,7 +51,7 @@ const ModelViewer = (props) => {
                   onClick={() => openModalByType(hotspot, index)}
                 >
                   <span className='hotspot-label' onClick={() => openModalByType(hotspot, index)}>
-                    {`${index + 1}. ${hotspot.labelText}`}{' '}
+                    {he.decode(hotspot.labelText)}
                   </span>
                 </div>
               )
@@ -59,6 +60,27 @@ const ModelViewer = (props) => {
       </model-viewer>
     </>
   );
+};
+
+ModelViewer.propTypes = {
+  handleClick: PropTypes.func.isRequired,
+  hotspots: PropTypes.arrayOf(
+    PropTypes.shape({
+      interactionpos: PropTypes.string,
+      labelText: PropTypes.string,
+      action: PropTypes.shape({
+        metadata: PropTypes.shape({
+          contentType: PropTypes.string.isRequired,
+        }).isRequired,
+      }).isRequired,
+    })
+  ).isRequired,
+  modelPath: PropTypes.string.isRequired,
+  id: PropTypes.string.isRequired,
+  showContentModal: PropTypes.func.isRequired,
+  mvInstance: PropTypes.shape({
+    loaded: PropTypes.bool.isRequired,
+  }),
 };
 
 export default ModelViewer;

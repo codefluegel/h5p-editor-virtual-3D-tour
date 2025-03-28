@@ -1,11 +1,8 @@
-// component to render hotspots from main a functional component
-import React from "react";
+import PropTypes from 'prop-types';
+import React from 'react';
 
 const ToolBar = (props) => {
-  const {
-    animations,
-    modelViewerInstance,
-  } = props;
+  const { animations, modelViewerInstance } = props;
 
   // buttonstate
   const [buttonState, setButtonState] = React.useState(false);
@@ -14,19 +11,18 @@ const ToolBar = (props) => {
     setButtonState(!buttonState);
 
     if (modelViewerInstance) {
-      modelViewerInstance.availableAnimations.length &&
-      modelViewerInstance.paused
+      modelViewerInstance.availableAnimations.length && modelViewerInstance.paused
         ? modelViewerInstance.play()
         : modelViewerInstance.pause();
     }
   };
 
   return (
-    <div className="tool-bar">
+    <div className='tool-bar'>
       <div>
         {animations.length > 0 && (
-          <button className="button" onClick={handlePlayPause}>
-            {buttonState ? "pause" : "play"}
+          <button className='toolbar-btn' onClick={handlePlayPause}>
+            {buttonState ? 'pause' : 'play'}
           </button>
         )}
       </div>
@@ -35,3 +31,12 @@ const ToolBar = (props) => {
 };
 
 export default ToolBar;
+ToolBar.propTypes = {
+  animations: PropTypes.arrayOf(PropTypes.object).isRequired,
+  modelViewerInstance: PropTypes.shape({
+    availableAnimations: PropTypes.arrayOf(PropTypes.object).isRequired,
+    paused: PropTypes.bool.isRequired,
+    play: PropTypes.func.isRequired,
+    pause: PropTypes.func.isRequired,
+  }).isRequired,
+};

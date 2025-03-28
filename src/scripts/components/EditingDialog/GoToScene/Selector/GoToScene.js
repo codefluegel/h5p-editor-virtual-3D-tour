@@ -50,7 +50,7 @@ GoToScene.contextType = H5PContext;
 
 GoToScene.propTypes = {
   currentModel: PropTypes.number.isRequired,
-  markedScene: PropTypes.number,
+  markedModel: PropTypes.number,
   hasInputError: PropTypes.bool,
   setNextModelId: PropTypes.func.isRequired,
   newModel: PropTypes.func.isRequired,

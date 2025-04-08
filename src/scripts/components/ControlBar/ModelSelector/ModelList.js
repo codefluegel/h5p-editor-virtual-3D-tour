@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types';
 import React from 'react';
-import ModelRow from './Row/ModelRow';
+import ModelRow from '@components/ControlBar/ModelSelector/Row/ModelRow';
 
 /**
  * @class

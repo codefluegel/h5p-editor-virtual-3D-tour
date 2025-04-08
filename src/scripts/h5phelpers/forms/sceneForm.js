@@ -1,4 +1,4 @@
-import { getModelField, isChildrenValid } from '../editorForms';
+import { getModelField, isChildrenValid } from '@h5phelpers/editorForms.js';
 
 /**
  * Creates scene form and appends it to wrapper

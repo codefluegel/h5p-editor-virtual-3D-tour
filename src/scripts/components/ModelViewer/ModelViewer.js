@@ -1,12 +1,19 @@
 import '@components/ModelViewer/ModelViewer.scss';
-import he from 'he';
+import { getSource } from '@context/H5PContext';
+import { purifyHTML } from '@utils/utils.js';
 import PropTypes from 'prop-types';
 import React, { useEffect, useState } from 'react';
-import { getSource } from '../../context/H5PContext';
-import './ModelViewer.scss';
 
 const ModelViewer = (props) => {
-  const { handleClick, hotspots, modelPath, id, showContentModal, mvInstance } = props;
+  const {
+    handleClick,
+    hotspots,
+    modelPath,
+    id,
+    showContentModal,
+    mvInstance,
+    modelDescriptionARIA,
+  } = props;
 
   const [hs, sethotspots] = useState(null);
   const [filePath, setFilePath] = useState(null);
@@ -15,12 +22,20 @@ const ModelViewer = (props) => {
     showContentModal(hotspot, index);
   };
 
+  const handleKeyDown = (event, hotspot, index) => {
+    if (event.key === 'Enter' || event.key === ' ') {
+      event.preventDefault();
+      openModalByType(hotspot, index);
+    }
+  };
+
   useEffect(() => {
     setFilePath(null);
+    const timeout = 100;
     const timeoutId = setTimeout(() => {
       sethotspots(hotspots);
       setFilePath(getSource(modelPath));
-    }, 100);
+    }, timeout);
 
     return () => clearTimeout(timeoutId);
   }, [hotspots, modelPath]);
@@ -30,10 +45,13 @@ const ModelViewer = (props) => {
       <model-viewer
         id={id}
         onClick={handleClick}
-        style={{ width: '100%', height: '100%' }}
+        class='modelViewer'
         src={filePath}
         camera-controls
-        alt={modelPath.split('/').pop().split('.').slice(0, -1).join('.')}
+        alt={modelDescriptionARIA}
+        auto-rotate
+        ar
+        ar-scale='fixed'
       >
         {hs &&
           mvInstance &&
@@ -42,17 +60,20 @@ const ModelViewer = (props) => {
             return (
               hotspot.interactionpos && (
                 <div
-                  className={`hotspot h5p_${hotspot.action.metadata.contentType
-                    .replace(/[ ,]+/g, '_')
-                    .toLowerCase()}`}
+                  className='hotspot'
                   key={index}
                   slot={`hotspot-${index}`}
                   data-surface={hotspot.interactionpos}
-                  onClick={() => openModalByType(hotspot, index)}
                 >
-                  <span className='hotspot-label' onClick={() => openModalByType(hotspot, index)}>
-                    {he.decode(hotspot.labelText)}
-                  </span>
+                  <button
+                    className={`hotspot h5p_${hotspot.action.metadata.contentType
+                      .replace(/[ ,]+/g, '_')
+                      .toLowerCase()}`}
+                    aria-label={purifyHTML(hotspot.labelText)}
+                    onClick={() => openModalByType(hotspot, index)}
+                    onKeyDown={(event) => handleKeyDown(event, hotspot, index)}
+                  />
+                  <div className='hotspot-label'>{purifyHTML(hotspot.labelText)}</div>
                 </div>
               )
             );
@@ -81,6 +102,7 @@ ModelViewer.propTypes = {
   mvInstance: PropTypes.shape({
     loaded: PropTypes.bool.isRequired,
   }),
+  modelDescriptionARIA: PropTypes.string.isRequired,
 };
 
 export default ModelViewer;

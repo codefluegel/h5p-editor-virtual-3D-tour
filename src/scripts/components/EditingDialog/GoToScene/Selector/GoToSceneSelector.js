@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import ModelList from '../../../ControlBar/ModelSelector/ModelList';
-import './GoToSceneSelector.scss';
+import ModelList from '@components/ControlBar/ModelSelector/ModelList';
+import '@components/EditingDialog/GoToScene/Selector/GoToSceneSelector.scss';
 
 const GoToSceneSelector = (props) => (
   <div className='go-to-scene-selector'>

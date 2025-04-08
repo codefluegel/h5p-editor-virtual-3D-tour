@@ -1,11 +1,16 @@
+import '@components/Toolbar/Toolbar.scss';
+import { H5PContext } from '@context/H5PContext.js';
 import PropTypes from 'prop-types';
-import React from 'react';
+import React, { useContext, useState } from 'react';
 
 const ToolBar = (props) => {
   const { animations, modelViewerInstance } = props;
-
   // buttonstate
-  const [buttonState, setButtonState] = React.useState(false);
+  const [buttonState, setButtonState] = useState(false);
+  const context = useContext(H5PContext);
+
+  const playLabel = context.t('playAnimation');
+  const pauseLabel = context.t('pauseAnimation');
 
   const handlePlayPause = () => {
     setButtonState(!buttonState);
@@ -18,25 +23,24 @@ const ToolBar = (props) => {
   };
 
   return (
-    <div className='tool-bar'>
-      <div>
-        {animations.length > 0 && (
-          <button className='toolbar-btn' onClick={handlePlayPause}>
-            {buttonState ? 'pause' : 'play'}
-          </button>
-        )}
-      </div>
-    </div>
+    <button
+      className='toolbar-btn'
+      aria-label={buttonState ? pauseLabel : playLabel}
+      onClick={handlePlayPause}
+    >
+      {buttonState ? pauseLabel : playLabel}
+    </button>
   );
 };
 
 export default ToolBar;
+
 ToolBar.propTypes = {
-  animations: PropTypes.arrayOf(PropTypes.object).isRequired,
+  animations: PropTypes.arrayOf(PropTypes.string).isRequired,
   modelViewerInstance: PropTypes.shape({
-    availableAnimations: PropTypes.arrayOf(PropTypes.object).isRequired,
+    availableAnimations: PropTypes.arrayOf(PropTypes.string).isRequired,
     paused: PropTypes.bool.isRequired,
     play: PropTypes.func.isRequired,
     pause: PropTypes.func.isRequired,
-  }).isRequired,
+  }),
 };

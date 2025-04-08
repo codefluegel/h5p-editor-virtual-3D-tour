@@ -1,4 +1,4 @@
-import { getLibraries } from '../context/H5PContext';
+import { getLibraries } from '@context/H5PContext';
 
 /**
  * Get scenes field from Three Image semantics structure

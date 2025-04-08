@@ -1,11 +1,11 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+import '@components/ControlBar/ControlBar.scss';
+import ModelList from '@components/ControlBar/ModelSelector/ModelList.js';
+import ModelSelector from '@components/ControlBar/ModelSelector/ModelSelector.js';
+import ModelSelectorSubmenu from '@components/ControlBar/ModelSelector/Row/Submenu/ModelSelectorSubmenu.js';
 import { ModelEditingType } from '@components/EditingDialog/ModelEditor.js';
 import { H5PContext } from '@context/H5PContext.js';
-import ModelList from './ModelSelector/ModelList.js';
-import ModelSelectorSubmenu from './ModelSelector/Row/Submenu/ModelSelectorSubmenu.js';
-import ModelSelector from './ModelSelector/ModelSelector.js';
-import './ControlBar.scss';
+import PropTypes from 'prop-types';
+import React, { Component } from 'react';
 
 export default class ControlBar extends Component {
   /**

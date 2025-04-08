@@ -1,34 +1,37 @@
-import js from '@eslint/js';
+import eslintConfigSnordianH5P from 'eslint-config-snordian-h5p';
 import pluginReact from 'eslint-plugin-react';
-import { defineConfig } from 'eslint/config';
-import globals from 'globals';
 
-export default defineConfig([
+export default [
+  eslintConfigSnordianH5P.configs['flat/recommended'],
   {
-    files: ['**/*.{js,jsx}'],
-    ignores: ['dist/**/*', 'webpack.config.js'],
-    languageOptions: {
-      globals: {
-        ...globals.browser,
-        H5P: 'readonly',
-        H5PEditor: 'readonly',
+    name: 'react-config',
+    ignores: ['dist/**/*'],
+    plugins: {
+      react: pluginReact,
+    },
+    rules: {
+      'react/prop-types': 'warn', // If you want to add prop types
+      'jsdoc/require-param-type': 'off',
+      'jsdoc/tag-lines': 'off',
+      'jsdoc/require-param-description': 'off',
+      'jsdoc/require-param': 'off',
+      'jsdoc/require-returns-description': 'off',
+      'jsdoc/check-param-names': 'off',
+      'jsdoc/require-returns-check': 'off',
+      'jsdoc/check-types': 'off',
+      'brace-style': ['off', '1tbs'],
+    },
+    settings: {
+      react: {
+        version: 'detect',
       },
+    },
+    languageOptions: {
       parserOptions: {
-        ecmaVersion: 'latest',
-        sourceType: 'module',
         ecmaFeatures: {
-          jsx: true,
+          jsx: true, // Activate support for JSX
         },
       },
     },
-    plugins: { js },
-    extends: ['js/recommended'],
   },
-  {
-    ...pluginReact.configs.flat.recommended,
-    rules: {
-      ...pluginReact.configs.flat.recommended.rules,
-      'react/prop-types': 'warn',
-    },
-  },
-]);
+];

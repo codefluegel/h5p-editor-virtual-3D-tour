@@ -1,3 +1,5 @@
+import EditingDialog from '@components/EditingDialog/EditingDialog';
+import GoToSceneWrapper from '@components/EditingDialog/GoToScene/GoToSceneWrapper';
 import '@components/EditingDialog/InteractionEditor.scss';
 import { H5PContext } from '@context/H5PContext';
 import { getLibraryDataFromFields } from '@h5phelpers/editorForms';
@@ -6,12 +8,10 @@ import {
   sanitizeInteractionParams,
   validateInteractionForm,
 } from '@h5phelpers/forms/interactionForm';
+import { getDefaultLibraryParams, isGoToScene } from '@h5phelpers/libraryParams.js';
+import { getModelFromId } from '@h5phelpers/modelParams.js';
 import PropTypes from 'prop-types';
 import React from 'react';
-import { getDefaultLibraryParams, isGoToScene } from '../../h5phelpers/libraryParams.js';
-import { getModelFromId } from '../../h5phelpers/modelParams.js';
-import EditingDialog from './EditingDialog';
-import GoToSceneWrapper from './GoToScene/GoToSceneWrapper';
 
 export const InteractionEditingType = {
   NOT_EDITING: null,

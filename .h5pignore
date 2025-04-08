@@ -8,3 +8,5 @@ package-lock.json
 README.md
 TODOs.md
 webpack.config.js
+dist
+eslint.config.js

@@ -1,8 +1,8 @@
-import React, { Component } from 'react';
+import '@components/EditingDialog/GoToScene/Selector/GoToScene.scss';
+import GoToSceneSelector from '@components/EditingDialog/GoToScene/Selector/GoToSceneSelector.js';
+import { H5PContext } from '@context/H5PContext';
 import PropTypes from 'prop-types';
-import { H5PContext } from '../../../../context/H5PContext';
-import './GoToScene.scss';
-import GoToSceneSelector from './GoToSceneSelector';
+import React, { Component } from 'react';
 
 export default class GoToScene extends Component {
   render() {

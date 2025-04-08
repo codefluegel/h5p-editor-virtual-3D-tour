@@ -8,9 +8,7 @@ export default class Virtual3DTour {
     // geting the model from the parent
     // this depends on the parent structure
     // const customParams = parent.params.params || parent.params || {};
-
     this.params = params || {};
-
     this.params = Object.assign(
       {
         models: params ? params.models : [],

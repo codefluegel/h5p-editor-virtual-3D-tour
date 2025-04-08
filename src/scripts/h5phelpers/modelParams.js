@@ -1,5 +1,5 @@
-import { ModelEditingType } from '../components/EditingDialog/ModelEditor.js';
-import { isGoToScene } from './libraryParams';
+import { ModelEditingType } from '@components/EditingDialog/ModelEditor.js';
+import { isGoToScene } from '@h5phelpers/libraryParams.js';
 
 /** @typedef {{ playlistId: string, title: string, audioTracks: object }} Playlist */
 /** @typedef {{ playlist: Playlist }} Model */

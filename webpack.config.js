@@ -1,19 +1,22 @@
-const path = require('path');
-const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+import MiniCssExtractPlugin from 'mini-css-extract-plugin';
+import { resolve as _resolve, dirname, join } from 'path';
+import { fileURLToPath } from 'url';
 
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 const mode = process.argv.includes('--mode=production') ? 'production' : 'development';
 const libraryName = process.env.npm_package_name;
 
-module.exports = {
+export default {
   mode: mode,
   resolve: {
     alias: {
-      '@components': path.resolve(__dirname, 'src/scripts/components'),
-      '@context': path.resolve(__dirname, 'src/scripts/context'),
-      '@h5phelpers': path.resolve(__dirname, 'src/scripts/h5phelpers'),
-      '@scripts': path.resolve(__dirname, 'src/scripts'),
-      '@styles': path.resolve(__dirname, 'src/styles'),
-      '@types': path.resolve(__dirname, 'src/scripts/types'),
+      '@components': _resolve(__dirname, 'src/scripts/components'),
+      '@context': _resolve(__dirname, 'src/scripts/context'),
+      '@h5phelpers': _resolve(__dirname, 'src/scripts/h5phelpers'),
+      '@styles': _resolve(__dirname, 'src/styles'),
+      '@types': _resolve(__dirname, 'src/scripts/types'),
+      '@utils': _resolve(__dirname, 'src/scripts/utils'),
     },
   },
   plugins: [
@@ -26,7 +29,7 @@ module.exports = {
   },
   output: {
     filename: `${libraryName}.js`,
-    path: path.resolve(__dirname, 'dist'),
+    path: _resolve(__dirname, 'dist'),
     clean: true,
   },
   target: ['browserslist'],
@@ -54,12 +57,12 @@ module.exports = {
       },
       {
         test: /\.svg|\.jpg|\.png$/,
-        include: path.join(__dirname, 'src/images'),
+        include: join(__dirname, 'src/images'),
         type: 'asset/resource',
       },
       {
         test: /\.woff$/,
-        include: path.join(__dirname, 'src/fonts'),
+        include: join(__dirname, 'src/fonts'),
         type: 'asset/resource',
       },
     ],

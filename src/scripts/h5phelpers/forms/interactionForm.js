@@ -1,4 +1,4 @@
-import {getInteractionsField, isChildrenValid} from "../editorForms";
+import { getInteractionsField, isChildrenValid } from '@h5phelpers/editorForms.js';
 
 /**
  * Create interaction form and append it to wrapper
@@ -9,21 +9,14 @@ import {getInteractionsField, isChildrenValid} from "../editorForms";
  * @param parent
  */
 export const createInteractionForm = (field, params, wrapper, parent) => {
-  const hiddenFormFields = [
-    'interactionpos',
-  ];
+  const hiddenFormFields = ['interactionpos'];
 
   const interactionsField = getInteractionsField(field);
-  const interactionFields = interactionsField.field.fields.filter(field => {
+  const interactionFields = interactionsField.field.fields.filter((field) => {
     return !hiddenFormFields.includes(field.name);
   });
 
-  H5PEditor.processSemanticsChunk(
-    interactionFields,
-    params,
-    wrapper,
-    parent
-  );
+  H5PEditor.processSemanticsChunk(interactionFields, params, wrapper, parent);
 
   const libraryWrapper = wrapper.querySelector('.field.library');
 
@@ -35,7 +28,7 @@ export const createInteractionForm = (field, params, wrapper, parent) => {
   ];
 
   // Remove semantics that we don't want to show
-  hiddenSemanticsSelectors.forEach(selector => {
+  hiddenSemanticsSelectors.forEach((selector) => {
     const foundElement = wrapper.querySelector(`.field.library > ${selector}`);
 
     if (foundElement) {

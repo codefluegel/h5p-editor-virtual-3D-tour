@@ -1,8 +1,8 @@
-import React, { Component } from 'react';
-import PropTypes from 'prop-types';
+import '@components/ControlBar/ModelSelector/Row/ModelRow.scss';
 import { H5PContext } from '@context/H5PContext.js';
-import './ModelRow.scss';
 import { modelType } from '@types/types';
+import PropTypes from 'prop-types';
+import React, { Component } from 'react';
 
 export default class ModelRow extends Component {
   /**
@@ -76,7 +76,7 @@ ModelRow.propTypes = {
   isMarkedModel: PropTypes.bool,
   isShowingCheck: PropTypes.bool,
   isAfterActiveModel: PropTypes.bool,
-  isStartScene: PropTypes.bool,
+  isStartModel: PropTypes.bool,
   onModelClick: PropTypes.func,
   onTitleClick: PropTypes.func,
   children: PropTypes.node,

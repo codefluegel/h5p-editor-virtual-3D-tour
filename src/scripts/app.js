@@ -1,17 +1,14 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
 import Main from '@components/Main';
 import { H5PContext } from '@context/H5PContext.js';
+import React from 'react';
 import { createRoot } from 'react-dom/client';
 
 export default class Virtual3DTour {
   constructor(parent, field, params, setValue) {
     // geting the model from the parent
     // this depends on the parent structure
-    const customParams = parent.params.params || parent.params || {};
-
+    // const customParams = parent.params.params || parent.params || {};
     this.params = params || {};
-
     this.params = Object.assign(
       {
         models: params ? params.models : [],

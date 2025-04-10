@@ -1,7 +1,7 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import { modelType } from '@types/types';
-import './ActiveModelRow.scss';
+import '@components/ControlBar/ModelSelector/Row/ActiveModelRow.scss';
 
 /**
  * @param {object} props React props.

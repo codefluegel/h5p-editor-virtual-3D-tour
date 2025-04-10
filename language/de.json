@@ -1,7 +1,7 @@
 {
   "libraryStrings": {
     "noModelsTitle": "Keine Modelle",
-    "noModelsDescription": "Klicken Sie auf die Schaltfläche \"Neues Modell\" unten, um das erste Modell hinzuzufügen",
+    "noModelDescription": "Klicken Sie auf die Schaltfläche \"Neues Modell\" unten, um das erste Modell hinzuzufügen",
     "closeModelSelector": "Modellauswahl schließen",
     "cancel": "Abbrechen",
     "confirm": "Bestätigen",
@@ -39,6 +39,8 @@
     "noPlaylistsAdded": "Keine Playlists hinzugefügt",
     "playlist": "Playlist",
     "newPlaylist": "Neue Playlist",
-    "clickModel": "Versuche das Modell zu treffen"
+    "clickModel": "Versuche das Modell zu treffen",
+    "pauseAnimation": "Pause animation",
+    "playAnimation": "Play animation"
   }
 }

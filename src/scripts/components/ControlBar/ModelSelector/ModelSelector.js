@@ -1,9 +1,9 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import ExpandedModelSelector from '@components/ControlBar/ModelSelector/ExpandedModelSelector.js';
+import '@components/ControlBar/ModelSelector/ModelSelector.scss';
+import ActiveModelRow from '@components/ControlBar/ModelSelector/Row/ActiveModelRow.js';
 import { H5PContext } from '@context/H5PContext.js';
-import ActiveModelRow from './Row/ActiveModelRow.js';
-import ExpandedModelSelector from './ExpandedModelSelector.js';
-import './ModelSelector.scss';
+import PropTypes from 'prop-types';
+import React from 'react';
 
 export default class ModelSelector extends React.Component {
   /**
@@ -64,7 +64,7 @@ export default class ModelSelector extends React.Component {
 ModelSelector.contextType = H5PContext;
 
 ModelSelector.propTypes = {
-  currentScene: PropTypes.number,
+  currentModel: PropTypes.number,
   isExpanded: PropTypes.bool,
   toggleExpand: PropTypes.func.isRequired,
   children: PropTypes.node,

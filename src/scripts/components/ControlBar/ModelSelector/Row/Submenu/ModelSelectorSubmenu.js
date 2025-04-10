@@ -1,6 +1,6 @@
-import React from 'react';
+import '@components/ControlBar/ModelSelector/Row/Submenu/ModelSelectorSubmenu.scss';
 import PropTypes from 'prop-types';
-import './ModelSelectorSubmenu.scss';
+import React from 'react';
 
 /**
  * @param {object} props React props.

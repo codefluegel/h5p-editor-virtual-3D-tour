@@ -1,14 +1,4 @@
-import { getModelField, isChildrenValid } from '../editorForms';
-
-const DefaultInteractionValues = {
-  threeSixty: {
-    spread: 20,
-  },
-  static: {
-    spread: 30,
-    center: [50, 50],
-  },
-};
+import { getModelField, isChildrenValid } from '@h5phelpers/editorForms.js';
 
 /**
  * Creates scene form and appends it to wrapper

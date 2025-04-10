@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import './ExpandedModelSelector.scss';
+import '@components/ControlBar/ModelSelector/ExpandedModelSelector.scss';
 
 /**
  * @param {object} props React props.

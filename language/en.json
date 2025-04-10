@@ -1,7 +1,7 @@
 {
   "libraryStrings": {
     "noModelsTitle": "No models",
-    "noModelsDescription": "Click the \"New model\" button below to add the first model",
+    "noModelDescription": "Click the \"New model\" button below to add the first model",
     "closeModelSelector": "Close the model selector",
     "cancel": "Cancel",
     "confirm": "Confirm",
@@ -39,6 +39,8 @@
     "noPlaylistsAdded": "No playlists added",
     "playlist": "Playlist",
     "newPlaylist": "New playlist",
-    "clickModel": "Try click ON the model"
+    "clickModel": "Try click ON the model",
+    "pauseAnimation": "Pause animation",
+    "playAnimation": "Play animation"
   }
 }

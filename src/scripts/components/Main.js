@@ -1,22 +1,22 @@
+import ControlBar from '@components/ControlBar/ControlBar.js';
 import InteractionEditor, {
   InteractionEditingType,
 } from '@components/EditingDialog/InteractionEditor.js';
 import ModelEditor, { ModelEditingType } from '@components/EditingDialog/ModelEditor.js';
 import InteractionsBar from '@components/InteractionsBar/InteractionsBar.js';
+import LoadingSpinner from '@components/LoadingSpinner/LoadingSpinner.js';
 import '@components/Main.scss';
 import ModelViewer from '@components/ModelViewer/ModelViewer';
+import NoModel from '@components/ModelViewer/NoModel.js';
 import ToolBar from '@components/Toolbar/Toolbar';
+import { getSource } from '@context/H5PContext';
 import { H5PContext } from '@context/H5PContext.js';
+import { showConfirmationDialog } from '@h5phelpers/h5pComponents.js';
 import { deleteModel, getModelFromId, updateModel } from '@h5phelpers/modelParams.js';
 import PropTypes from 'prop-types';
 import React from 'react';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { getSource } from '../context/H5PContext';
-import { showConfirmationDialog } from '../h5phelpers/h5pComponents.js';
-import ControlBar from './ControlBar/ControlBar.js';
-import LoadingSpinner from './LoadingSpinner/LoadingSpinner.js';
-import NoModel from './ModelViewer/NoModel.js';
 
 export default class Main extends React.Component {
   constructor(props) {
@@ -42,7 +42,8 @@ export default class Main extends React.Component {
   componentDidMount() {
     // get model viewer dom element by id
 
-    const modelViewer = document.getElementById('model-viewer-' + this.state.currentModel);
+    const modelString = `model-viewer-${this.state.currentModel}`;
+    const modelViewer = document.getElementById(modelString);
 
     if (!modelViewer) {
       return;
@@ -51,7 +52,6 @@ export default class Main extends React.Component {
 
     modelViewer.addEventListener('load', () => {
       // create hotspots and set model viewer instance
-
       this.setState({
         loadingSpinner: false,
         modelViewerInstance: modelViewer,
@@ -85,7 +85,13 @@ export default class Main extends React.Component {
 
   componentWillUnmount() {
     // remove event listener
-    this.state.modelViewerInstance.removeEventListener('load');
+    this.state.modelViewerInstance.removeEventListener('load', () => {
+      this.setState({
+        interactions: [],
+        modelViewerInstance: null,
+        animations: [],
+      });
+    });
   }
 
   handleLibraryChange = (library) => {
@@ -493,21 +499,25 @@ export default class Main extends React.Component {
             )}
             {hasModels ? (
               <ModelViewer
-                id={'model-viewer-' + model.modelId}
+                id={`model-viewer-${model.modelId}`}
                 handleClick={this.handleModelClick.bind(this)}
                 hotspots={model.interactions}
                 currentModel={model}
                 modelPath={model.glbModel.path}
                 showContentModal={this.showContentModal.bind(this)}
                 mvInstance={this.state.modelViewerInstance}
+                modelDescriptionARIA={model.modelDescriptionARIA}
               />
             ) : (
               <NoModel />
             )}
-            <ToolBar
-              animations={this.state.animations}
-              modelViewerInstance={this.state.modelViewerInstance}
-            />
+            {this.state.animations.length > 0 &&
+              this.state.editingInteraction === InteractionEditingType.NOT_EDITING && (
+                <ToolBar
+                  animations={this.state.animations}
+                  modelViewerInstance={this.state.modelViewerInstance}
+                />
+              )}
           </div>
           {this.state.editingModel !== ModelEditingType.NOT_EDITING && (
             <ModelEditor
@@ -558,4 +568,6 @@ Main.contextType = H5PContext;
 
 Main.propTypes = {
   modelPath: PropTypes.string,
+  initialModelPath: PropTypes.string.isRequired,
+  initialModel: PropTypes.string.isRequired,
 };

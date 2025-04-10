@@ -1,18 +1,17 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import EditingDialog from './EditingDialog';
+import EditingDialog from '@components/EditingDialog/EditingDialog';
+import GoToSceneWrapper from '@components/EditingDialog/GoToScene/GoToSceneWrapper';
+import '@components/EditingDialog/InteractionEditor.scss';
 import { H5PContext } from '@context/H5PContext';
-import { getDefaultLibraryParams, isGoToScene } from '../../h5phelpers/libraryParams.js';
 import { getLibraryDataFromFields } from '@h5phelpers/editorForms';
 import {
   createInteractionForm,
   sanitizeInteractionParams,
   validateInteractionForm,
 } from '@h5phelpers/forms/interactionForm';
-import { sanitizeModelForm, validateModelForm } from '@h5phelpers/forms/sceneForm';
-import '@components/EditingDialog/InteractionEditor.scss';
-import { getModelFromId } from '../../h5phelpers/modelParams.js';
-import GoToSceneWrapper from './GoToScene/GoToSceneWrapper';
+import { getDefaultLibraryParams, isGoToScene } from '@h5phelpers/libraryParams.js';
+import { getModelFromId } from '@h5phelpers/modelParams.js';
+import PropTypes from 'prop-types';
+import React from 'react';
 
 export const InteractionEditingType = {
   NOT_EDITING: null,
@@ -104,18 +103,6 @@ export default class InteractionEditor extends React.Component {
     this.props.doneAction(this.params, this.scene && this.scene.params);
   }
 
-  validateScene() {
-    const isValid = validateModelForm(this.scene.children);
-    if (!isValid) {
-      return false;
-    }
-
-    const isThreeSixtyScene = this.scene.params.sceneType === SceneTypes.THREE_SIXTY_SCENE;
-
-    sanitizeModelForm(this.scene.params, isThreeSixtyScene, this.scene.params.cameraStartPosition);
-    return true;
-  }
-
   removeInputErrors() {
     this.setState({
       hasInputError: false,
@@ -177,4 +164,12 @@ InteractionEditor.propTypes = {
   ]),
   doneAction: PropTypes.func.isRequired,
   removeAction: PropTypes.func.isRequired,
+  hotspot: PropTypes.shape({
+    interactionpos: PropTypes.string,
+    action: PropTypes.shape({
+      library: PropTypes.string.isRequired,
+    }).isRequired,
+  }),
+  newInteractionPosition: PropTypes.string,
+  currentModel: PropTypes.string.isRequired,
 };

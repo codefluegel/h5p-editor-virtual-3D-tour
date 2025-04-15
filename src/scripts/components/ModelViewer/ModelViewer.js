@@ -4,6 +4,9 @@ import { purifyHTML } from '@utils/utils.js';
 import PropTypes from 'prop-types';
 import React, { useEffect, useState } from 'react';
 
+/** @constant {number} FILE_PATH_TIMEOUT_MS File path setting timeout. */
+const FILE_PATH_TIMEOUT_MS = 500;
+
 const ModelViewer = (props) => {
   const {
     handleClick,
@@ -28,6 +31,46 @@ const ModelViewer = (props) => {
       openModalByType(hotspot, index);
     }
   };
+
+  const POLLING_INTERVAL_MS = 500;
+  const MAX_POLL_ATTEMPTS = 50;
+
+  useEffect(() => {
+    let pollCount = 0;
+    let intervalId;
+
+    const attemptLoad = () => {
+      if (window.modelViewerLoaded) {
+        clearInterval(intervalId);
+        return;
+      }
+
+      if (pollCount >= MAX_POLL_ATTEMPTS) {
+        clearInterval(intervalId);
+        import('@google/model-viewer')
+          .then(() => {
+            window.modelViewerLoaded = true;
+          })
+          .catch((error) => {});
+        return;
+      }
+
+      pollCount++;
+    };
+
+    if (!window.modelViewerLoaded) {
+      intervalId = setInterval(attemptLoad, POLLING_INTERVAL_MS);
+
+      import('@google/model-viewer')
+        .then(() => {
+          window.modelViewerLoaded = true;
+          clearInterval(intervalId);
+        })
+        .catch((error) => {});
+    }
+
+    return () => clearInterval(intervalId);
+  }, []);
 
   useEffect(() => {
     setFilePath(null);

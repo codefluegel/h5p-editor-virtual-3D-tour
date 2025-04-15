@@ -47,7 +47,7 @@ const ModelViewer = (props) => {
 
       if (pollCount >= MAX_POLL_ATTEMPTS) {
         clearInterval(intervalId);
-        import('@google/model-viewer')
+        import(/* webpackMode: "eager" */ '@google/model-viewer')
           .then(() => {
             window.modelViewerLoaded = true;
           })
@@ -61,7 +61,7 @@ const ModelViewer = (props) => {
     if (!window.modelViewerLoaded) {
       intervalId = setInterval(attemptLoad, POLLING_INTERVAL_MS);
 
-      import('@google/model-viewer')
+      import(/* webpackMode: "eager" */ '@google/model-viewer')
         .then(() => {
           window.modelViewerLoaded = true;
           clearInterval(intervalId);

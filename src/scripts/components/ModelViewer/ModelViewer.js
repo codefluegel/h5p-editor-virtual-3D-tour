@@ -4,6 +4,9 @@ import { purifyHTML } from '@utils/utils.js';
 import PropTypes from 'prop-types';
 import React, { useEffect, useState } from 'react';
 
+/** @constant {number} FILE_PATH_TIMEOUT_MS File path setting timeout. */
+const FILE_PATH_TIMEOUT_MS = 500;
+
 const ModelViewer = (props) => {
   const {
     handleClick,
@@ -28,6 +31,39 @@ const ModelViewer = (props) => {
       openModalByType(hotspot, index);
     }
   };
+
+  const POLLING_INTERVAL_MS = 500; // Check every 100 milliseconds
+  const MAX_POLL_ATTEMPTS = 50; // Give up after 5 seconds (50 * 100ms)
+
+  useEffect(() => {
+    let pollCount = 0;
+    let intervalId;
+
+    const attemptLoad = () => {
+      if (window.modelViewerLoaded) {
+        clearInterval(intervalId);
+        return;
+      }
+
+      if (pollCount >= MAX_POLL_ATTEMPTS) {
+        clearInterval(intervalId);
+        import('@google/model-viewer')
+          .then(() => {
+            window.modelViewerLoaded = true;
+          })
+          .catch((error) => {
+            console.error('Error loading Model Viewer after timeout:', error);
+          });
+        return;
+      }
+
+      pollCount++;
+    };
+
+    intervalId = setInterval(attemptLoad, POLLING_INTERVAL_MS);
+
+    return () => clearInterval(intervalId);
+  }, []);
 
   useEffect(() => {
     setFilePath(null);

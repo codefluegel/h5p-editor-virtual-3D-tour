@@ -32,8 +32,8 @@ const ModelViewer = (props) => {
     }
   };
 
-  const POLLING_INTERVAL_MS = 500; // Check every 100 milliseconds
-  const MAX_POLL_ATTEMPTS = 50; // Give up after 5 seconds (50 * 100ms)
+  const POLLING_INTERVAL_MS = 500;
+  const MAX_POLL_ATTEMPTS = 50;
 
   useEffect(() => {
     let pollCount = 0;
@@ -51,16 +51,23 @@ const ModelViewer = (props) => {
           .then(() => {
             window.modelViewerLoaded = true;
           })
-          .catch((error) => {
-            console.error('Error loading Model Viewer after timeout:', error);
-          });
+          .catch((error) => {});
         return;
       }
 
       pollCount++;
     };
 
-    intervalId = setInterval(attemptLoad, POLLING_INTERVAL_MS);
+    if (!window.modelViewerLoaded) {
+      intervalId = setInterval(attemptLoad, POLLING_INTERVAL_MS);
+
+      import('@google/model-viewer')
+        .then(() => {
+          window.modelViewerLoaded = true;
+          clearInterval(intervalId);
+        })
+        .catch((error) => {});
+    }
 
     return () => clearInterval(intervalId);
   }, []);
